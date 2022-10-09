@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: DSPro
+Version: 0.0.1
+Summary: Data Structures with concurrency support
+Home-page: UNKNOWN
+Author: Janathsri Krishnan k (JANATH JSK)
+Author-email: jskutility22@gmail.com
+License: MIT
+Keywords: python,data structure,concurrency,algorithms,multi processing
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Education
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+License-File: LICENSE.txt
+
+Same data structure can be used by multiple threads
+
