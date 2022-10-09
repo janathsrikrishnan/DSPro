@@ -14,7 +14,8 @@ setup(
         long_description=LONG_DESCRIPTION,
         packages=find_packages(),
         install_requires=[], 
-        license = 'MIT',       
+        license = 'MIT',  
+        url="https://github.com/janathsrikrishnan/DSPro"     
         keywords=['python', 'data structure', 'concurrency', 'algorithms', 'multi processing'],
         classifiers= [
             "Development Status :: 3 - Alpha",
