@@ -1,2 +1,1 @@
-from CList import *
-from CLinkedList import CLinkedList
+from DSPro.List.CList import CList
