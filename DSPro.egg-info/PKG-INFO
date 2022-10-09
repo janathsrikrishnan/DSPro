@@ -2,9 +2,9 @@ Metadata-Version: 2.1
 Name: DSPro
 Version: 0.0.1
 Summary: Data Structures with concurrency support
-Home-page: UNKNOWN
+Home-page: https://github.com/janathsrikrishnan/DSPro
 Author: Janathsri Krishnan k (JANATH JSK)
-Author-email: jskutility22@gmail.com
+Author-email: janathjsk007@gmail.com
 License: MIT
 Keywords: python,data structure,concurrency,algorithms,multi processing
 Platform: UNKNOWN

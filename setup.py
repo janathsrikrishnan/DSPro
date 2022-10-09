@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.1' 
+VERSION = '0.0.2' 
 DESCRIPTION = 'Data Structures with concurrency support'
 LONG_DESCRIPTION = 'Same data structure can be used by multiple threads'
 
