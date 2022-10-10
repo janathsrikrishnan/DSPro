@@ -100,7 +100,7 @@ class CList:
         try:
             aux = copy.deepcopy(self.__list)
             auxClist = CList(aux)
-            return aux
+            return auxClist
         except Exception as e:
             return None
         finally:
