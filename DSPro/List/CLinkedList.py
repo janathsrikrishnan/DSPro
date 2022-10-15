@@ -181,5 +181,28 @@ class CLinkedList:
         """ return the root of the list"""
         return self.__root
 
+    def tolist(self) -> list:
+        """ return the list """
+        aux = []
+        pred = self.__root
+        pred.acquire()
+        
+        try:
+            curr = pred.next
+            curr.acquire()
+            while (str(curr.value()) != "#End#"):
+                pred.release()
+                pred = curr
+                curr = curr.next
+                aux.append(curr.value())
+                curr.release()
+            return aux
+        except Exception as e:
+            return aux
+        finally:
+            curr.release()
+            pred.release()
+
+
     
     
