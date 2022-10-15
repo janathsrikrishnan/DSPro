@@ -91,8 +91,47 @@ class CLinkedList:
         
 
     def pop(self, index : int = -1) -> CNode:
-        """ remove and return the node at given position default last"""
-        pass
+        """ remove and return the node at given position default last\n based on 0-index
+        Note: only -1 supported for last index. Any other negative index not supported """
+        pred = self.__root
+        pred.acquire()
+        if (index == -1):
+            try:
+                curr = pred.next
+                curr.acquire()
+                while (str(curr.value()) != "#End#"):
+                    pred.release()
+                    pred = curr
+                    curr = curr.next
+                    curr.release()
+                if str(pred.value()) != "#Start#" :
+                    pred.next = curr.next
+                    return True
+            except Exception as e:
+                return False
+            finally:
+                curr.release()
+                pred.release()
+        else:
+            try:
+                curr = pred.next
+                curr.acquire()
+                while (index and str(curr.value()) != "#End#"):
+                    pred.release()
+                    pred = curr
+                    curr = curr.next
+                    curr.release()
+                    index -= 1
+                if str(pred.next.value()) != "#End#" :
+                    pred.next = curr.next
+                    return True
+            except Exception as e:
+                return False
+            finally:
+                curr.release()
+                pred.release()
+                
+            
 
     def remove(self, item : 'any') -> bool:
         """ remove the element """
@@ -119,7 +158,7 @@ class CLinkedList:
         finally:
             curr.release()
             pred.release()
-            
+
     def root(self):
         """ return the root of the list"""
         return self.__root
