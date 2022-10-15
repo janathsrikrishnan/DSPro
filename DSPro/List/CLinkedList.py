@@ -28,8 +28,10 @@ class CLinkedList:
             
         else:
             self.__root = root
-        self.__length = 0       
-        self.Update = True  # if the list is updated it is marked to update the lenght in another thread
+
+        # for future ideas
+        # self.__length = 0       
+        # self.Update = True  # if the list is updated it is marked to update the lenght in another thread
         
 
     def addFront(self, item : 'any') -> bool:
@@ -86,7 +88,7 @@ class CLinkedList:
     
     def contains(self, item : 'any') -> int:
         """ check whether the element is present in the linked list """
-        pass
+        
 
     def pop(self, index : int = -1) -> CNode:
         """ remove and return the node at given position default last"""
@@ -94,8 +96,30 @@ class CLinkedList:
 
     def remove(self, item : 'any') -> bool:
         """ remove the element """
-        pass
-    
+        pred = self.__root
+        pred.acquire()
+        
+        try:
+            curr = pred.next
+            curr.acquire()
+            found = False
+            while (str(curr.value()) != "#End#"):
+                if str(curr.value()) == str(item): 
+                    found = True
+                    break
+                pred.release()
+                pred = curr
+                curr = curr.next
+                curr.release()
+            if found:
+                pred.next = curr.next
+                return True
+        except Exception as e:
+            return False
+        finally:
+            curr.release()
+            pred.release()
+            
     def root(self):
         """ return the root of the list"""
         return self.__root
