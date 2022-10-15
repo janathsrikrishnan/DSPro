@@ -88,7 +88,25 @@ class CLinkedList:
     
     def contains(self, item : 'any') -> int:
         """ check whether the element is present in the linked list """
+        pred = self.__root
+        pred.acquire()
         
+        try:
+            curr = pred.next
+            curr.acquire()
+            while (str(curr.value()) != "#End#"):
+                if str(curr.value()) == str(item): 
+                    return True
+                pred.release()
+                pred = curr
+                curr = curr.next
+                curr.release()
+        except Exception as e:
+            return False
+        finally:
+            curr.release()
+            pred.release()
+
 
     def pop(self, index : int = -1) -> CNode:
         """ remove and return the node at given position default last\n based on 0-index
