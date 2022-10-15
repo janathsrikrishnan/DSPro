@@ -33,6 +33,47 @@ class CLinkedList:
         # self.__length = 0       
         # self.Update = True  # if the list is updated it is marked to update the lenght in another thread
         
+    def __getitem__(self, index) -> 'any':
+        pred = self.__root
+        pred.acquire()
+        try:
+            curr = pred.next
+            curr.acquire()
+            while (index and str(curr.value()) != "#End#"):
+                pred.release()
+                pred = curr
+                curr = curr.next
+                curr.release()
+                index -= 1
+            if str(pred.next.value()) != "#End#" :
+                return curr.value()
+        except Exception as e:
+            return None
+        finally:
+            curr.release()
+            pred.release()
+
+    def __len__(self) -> int:
+        pred = self.__root
+        pred.acquire()
+        index = 0
+        try:
+            curr = pred.next
+            curr.acquire()
+            if (str(curr.value()) == "#End#"): return 0
+            while (str(curr.value()) != "#End#"):
+                pred.release()
+                pred = curr
+                curr = curr.next
+                curr.release()
+                index += 1
+            return index
+        except Exception as e:
+            return 0
+        finally:
+            curr.release()
+            pred.release()
+        
 
     def addFront(self, item : 'any') -> bool:
         """ add the new element to the front in the in the linked list """
@@ -149,8 +190,6 @@ class CLinkedList:
                 curr.release()
                 pred.release()
                 
-            
-
     def remove(self, item : 'any') -> bool:
         """ remove the element """
         pred = self.__root
@@ -202,6 +241,7 @@ class CLinkedList:
         finally:
             curr.release()
             pred.release()
+
 
 
     
